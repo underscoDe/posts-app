@@ -4,6 +4,7 @@
 
 :root {
   @apply h-full bg-[#f9fafb];
+  --tw-color-primary: 219 21% 39% / 1;
 }
 
 body {
