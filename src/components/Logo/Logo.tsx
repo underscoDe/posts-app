@@ -1,10 +1,11 @@
+import Link from 'next/link';
 import * as React from 'react';
 
 function Logo() {
   return (
-    <div>
+    <Link href='/'>
       <img width={180} height={50} src="/logo-dark-transparent.png" alt="Spit-it logo" />
-    </div>
+    </Link>
   );
 }
 
