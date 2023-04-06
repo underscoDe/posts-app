@@ -3,7 +3,7 @@ import { X } from "react-feather";
 import { Dialog, Transition } from "@headlessui/react"
 import { ModalProps } from "@/interfaces";
 
-function Modal({ isOpen, onClose, title, children }: ModalProps) {
+function Modal({ isOpen, onClose, children }: ModalProps) {
 
   const cancelButtonRef = useRef(null);
 
@@ -16,7 +16,7 @@ function Modal({ isOpen, onClose, title, children }: ModalProps) {
         initialFocus={cancelButtonRef}
         open={isOpen}
       >
-        <div className="min-h-screen px-4 text-center">
+        <div className="min-h-screen flex justify-center items-center px-4 text-center">
           <Dialog.Overlay className="fixed inset-0 bg-black opacity-30" />
 
           <span
@@ -27,10 +27,7 @@ function Modal({ isOpen, onClose, title, children }: ModalProps) {
             <X />
           </span>
 
-          <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-            <Dialog.Title as="h3" className="text-lg font-medium leading-6 text-gray-900">
-              {title}
-            </Dialog.Title>
+          <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform shadow-xl rounded-2xl">
             <div className="mt-2">{children}</div>
           </div>
         </div>
