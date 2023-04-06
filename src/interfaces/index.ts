@@ -1,3 +1,4 @@
+import { InputHTMLAttributes } from "react";
 import { Icon } from "react-feather";
 
 export interface LogoProps {
@@ -19,4 +20,9 @@ export interface ModalProps {
   isOpen: boolean;
   onClose: () => void;
   children: React.ReactNode;
+}
+
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
+    label: string;
+    required?: boolean;
 }
