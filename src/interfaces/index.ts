@@ -27,7 +27,7 @@ export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
   required?: boolean;
 }
 
-export interface LoginModalStore {
+export interface ModalStore {
   isOpen: boolean;
   open: () => void;
   close: () => void;
