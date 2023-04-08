@@ -4,8 +4,8 @@ import HeaderUserProfile from "@/components/HeaderUserProfile";
 
 function Header() {
   return (
-    <header className="text-primary">
-      <div className="container mx-auto flex justify-between py-4">
+    <header className="text-primary shadow-sidebar p-2 bg-white">
+      <div className="container mx-auto flex flex-wrap justify-between py-4">
         <HeaderSearchBar />
         <HeaderUserProfile />
       </div>
