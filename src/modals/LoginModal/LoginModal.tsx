@@ -1,15 +1,18 @@
 import Input from "@/components/Input/Input";
 import Modal from "@/components/Modal/Modal";
+import useLoginModalState from "@/hooks/useLoginModalState";
 import * as React from "react";
 
 function LoginModal() {
   const [isModalOpen, setIsModalOpen] = React.useState(true);
-  const handleModalClose = () => {
-    setIsModalOpen(false);
-  };
+  const loginModalState = useLoginModalState();
+
+  const [email, setEmail] = React.useState()
+  const [password, setPassword] = React.useState()
+  const [isLoading, setIsLoading] = React.useState()
 
   return (
-    <Modal isOpen={isModalOpen} onClose={handleModalClose}>
+    <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
       <div className="relative rounded-lg shadow bg-gray-700">
         <div className="px-6 py-6 lg:px-8">
           <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
@@ -22,6 +25,7 @@ function LoginModal() {
               name="email"
               id="email"
               placeholder="name@company.com"
+              value={email}
             />
             <Input
               label="Your password"
@@ -29,6 +33,7 @@ function LoginModal() {
               name="password"
               id="password"
               placeholder="••••••••"
+              value={password}
             />
             <button
               type="submit"

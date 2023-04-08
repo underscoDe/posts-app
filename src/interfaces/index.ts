@@ -22,7 +22,13 @@ export interface ModalProps {
   children: React.ReactNode;
 }
 
-export interface InputProps extends InputHTMLAttributes<HTMLInputElement>{
-    label: string;
-    required?: boolean;
+export interface InputProps extends InputHTMLAttributes<HTMLInputElement> {
+  label: string;
+  required?: boolean;
+}
+
+export interface LoginModalStore {
+  isOpen: boolean;
+  onOpen: () => void;
+  onClose: () => void;
 }
