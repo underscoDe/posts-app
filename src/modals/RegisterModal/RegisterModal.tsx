@@ -1,10 +1,12 @@
 import Input from "@/components/Input";
 import Modal from "@/components/Modal";
+import useLoginModalState from "@/hooks/useLoginModalState";
 import useRegisterModalState from "@/hooks/useRegisterModalState";
 import * as React from "react";
 
 function RegisterModal() {
   const registerModalState = useRegisterModalState();
+  const loginModalState = useLoginModalState();
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -23,6 +25,13 @@ function RegisterModal() {
       console.log("REGISTER:", err);
     }
   }, [registerModalState]);
+
+  const switchToLogin = React.useCallback(() => {
+    if (isLoading) return;
+
+    registerModalState.close();
+    loginModalState.open();
+  }, [isLoading, registerModalState, loginModalState]);
 
   return (
     <Modal isOpen={registerModalState.isOpen} onClose={registerModalState.close}>
@@ -86,12 +95,12 @@ function RegisterModal() {
             </button>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
               Registered yet?{" "}
-              <a
-                href="#"
-                className="text-blue-700 hover:underline dark:text-blue-500"
+              <span
+                onClick={switchToLogin}
+                className="text-blue-700 cursor-pointer hover:underline dark:text-blue-500"
               >
                 Login
-              </a>
+              </span>
             </div>
           </form>
         </div>

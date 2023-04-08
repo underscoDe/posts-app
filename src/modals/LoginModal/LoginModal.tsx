@@ -1,10 +1,12 @@
 import Input from "@/components/Input";
 import Modal from "@/components/Modal";
 import useLoginModalState from "@/hooks/useLoginModalState";
+import useRegisterModalState from "@/hooks/useRegisterModalState";
 import * as React from "react";
 
 function LoginModal() {
   const loginModalState = useLoginModalState();
+  const registerModalState = useRegisterModalState();
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -12,14 +14,21 @@ function LoginModal() {
 
   const onLogin = React.useCallback(async () => {
     try {
-      setIsLoading(true)
+      setIsLoading(true);
       // login stuff here
 
       loginModalState.close();
     } catch (err) {
-      console.log("LOGIN:", err)
+      console.log("LOGIN:", err);
     }
-  }, [loginModalState])
+  }, [loginModalState]);
+
+  const switchToRegister = React.useCallback(() => {
+    if (isLoading) return;
+
+    loginModalState.close();
+    registerModalState.open();
+  }, [isLoading, registerModalState, loginModalState]);
 
   return (
     <Modal isOpen={loginModalState.isOpen} onClose={loginModalState.close}>
@@ -56,12 +65,12 @@ function LoginModal() {
             </button>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
               Not registered?{" "}
-              <a
-                href="#"
-                className="text-blue-700 hover:underline dark:text-blue-500"
+              <span
+                onClick={switchToRegister}
+                className="text-blue-700 cursor-pointer hover:underline dark:text-blue-500"
               >
                 Create account
-              </a>
+              </span>
             </div>
           </form>
         </div>
