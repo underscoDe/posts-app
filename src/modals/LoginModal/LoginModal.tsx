@@ -7,9 +7,20 @@ function LoginModal() {
   const [isModalOpen, setIsModalOpen] = React.useState(true);
   const loginModalState = useLoginModalState();
 
-  const [email, setEmail] = React.useState()
-  const [password, setPassword] = React.useState()
-  const [isLoading, setIsLoading] = React.useState()
+  const [email, setEmail] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [isLoading, setIsLoading] = React.useState(false);
+
+  const onLogin = React.useCallback(async () => {
+    try {
+      setIsLoading(true)
+      // login stuff here
+
+      loginModalState.close();
+    } catch (err) {
+      console.log("LOGIN:", err)
+    }
+  }, [loginModalState])
 
   return (
     <Modal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)}>
@@ -18,7 +29,7 @@ function LoginModal() {
           <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
             Sign in
           </h3>
-          <form className="space-y-6" action="#">
+          <form onSubmit={onLogin} className="space-y-6" action="#">
             <Input
               label="Your email"
               type="email"
@@ -26,6 +37,7 @@ function LoginModal() {
               id="email"
               placeholder="name@company.com"
               value={email}
+              onChange={(e) => setEmail(e.target.value)}
             />
             <Input
               label="Your password"
@@ -34,9 +46,11 @@ function LoginModal() {
               id="password"
               placeholder="••••••••"
               value={password}
+              onChange={(e) => setPassword(e.target.value)}
             />
             <button
               type="submit"
+              disabled={isLoading}
               className="w-full text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Submit
