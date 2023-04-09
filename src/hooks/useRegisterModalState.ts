@@ -1,10 +1,10 @@
 import { ModalStore } from "@/interfaces";
 import { create } from "zustand";
 
-const useLoginModalState = create<ModalStore>((set) => ({
-  isOpen: false,
+const useRegisterModalState = create<ModalStore>((set) => ({
+  isOpen: true,
   open: () => set({ isOpen: true }),
   close: () => set({ isOpen: false }),
 }));
 
-export default useLoginModalState;
+export default useRegisterModalState;

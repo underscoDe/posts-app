@@ -4,12 +4,15 @@ import useLoginModalState from "@/hooks/useLoginModalState";
 import useRegisterModalState from "@/hooks/useRegisterModalState";
 import * as React from "react";
 
-function LoginModal() {
-  const loginModalState = useLoginModalState();
+function RegisterModal() {
   const registerModalState = useRegisterModalState();
+  const loginModalState = useLoginModalState();
 
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [confirmPassword, setConfirmPassword] = React.useState("");
+  const [name, setName] = React.useState("");
+  const [username, setUsername] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
 
   const onLogin = React.useCallback(async () => {
@@ -17,25 +20,25 @@ function LoginModal() {
       setIsLoading(true);
       // login stuff here
 
-      loginModalState.close();
+      registerModalState.close();
     } catch (err) {
-      console.log("LOGIN:", err);
+      console.log("REGISTER:", err);
     }
-  }, [loginModalState]);
+  }, [registerModalState]);
 
-  const switchToRegister = React.useCallback(() => {
+  const switchToLogin = React.useCallback(() => {
     if (isLoading) return;
 
-    loginModalState.close();
-    registerModalState.open();
+    registerModalState.close();
+    loginModalState.open();
   }, [isLoading, registerModalState, loginModalState]);
 
   return (
-    <Modal isOpen={loginModalState.isOpen} onClose={loginModalState.close}>
+    <Modal isOpen={registerModalState.isOpen} onClose={registerModalState.close}>
       <div className="relative rounded-lg shadow bg-gray-700">
         <div className="px-6 py-6 lg:px-8">
           <h3 className="mb-4 text-xl font-medium text-gray-900 dark:text-white">
-            Sign in
+            Register
           </h3>
           <form onSubmit={onLogin} className="space-y-6" action="#">
             <Input
@@ -48,6 +51,24 @@ function LoginModal() {
               onChange={(e) => setEmail(e.target.value)}
             />
             <Input
+              label="Your name"
+              type="text"
+              name="name"
+              id="name"
+              placeholder="John Doe"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+            />
+            <Input
+              label="Your username"
+              type="text"
+              name="username"
+              id="username"
+              placeholder="jdoe23"
+              value={username}
+              onChange={(e) => setUsername(e.target.value)}
+            />
+            <Input
               label="Your password"
               type="password"
               name="password"
@@ -55,6 +76,15 @@ function LoginModal() {
               placeholder="••••••••"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
+            />
+            <Input
+              label="Confirm your password"
+              type="password"
+              name="password_confirm"
+              id="password_confirm"
+              placeholder="••••••••"
+              value={confirmPassword}
+              onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <button
               type="submit"
@@ -64,12 +94,12 @@ function LoginModal() {
               Submit
             </button>
             <div className="text-sm font-medium text-gray-500 dark:text-gray-300">
-              Not registered?{" "}
+              Registered yet?{" "}
               <span
-                onClick={switchToRegister}
+                onClick={switchToLogin}
                 className="text-blue-700 cursor-pointer hover:underline dark:text-blue-500"
               >
-                Create account
+                Login
               </span>
             </div>
           </form>
@@ -79,4 +109,4 @@ function LoginModal() {
   );
 }
 
-export default LoginModal;
+export default RegisterModal;
