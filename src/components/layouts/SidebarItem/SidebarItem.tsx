@@ -15,7 +15,7 @@ function SidebarItem({
   const iconColor = router.pathname === href ? '#ffffff' : '#4e5d78';
 
   return (
-    <div className={`flex flex-row w-fit lg:w-auto mx-auto rounded-lg items-center ${itemBgColor} ${itemTextColor}`}>
+    <div className={`flex cursor-pointer flex-row w-fit lg:w-auto mx-auto rounded-lg items-center ${itemBgColor} ${itemTextColor}`}>
       <div className="relative rounded h-14 w-14 flex items-center justify-center p-4 lg:hidden">
         <ItemIcon size={28} color={iconColor} />
       </div>
