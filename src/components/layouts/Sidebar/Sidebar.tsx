@@ -11,19 +11,19 @@ const items = [
     label: "Feed",
     href: "/",
     icon: Grid,
-    show: true,
+    auth: false,
   },
   {
     label: "Notifications",
     href: "/notifications",
     icon: Bell,
-    show: true,
+    auth: true,
   },
   {
     label: "Profile",
     href: "/profile",
     icon: User,
-    show: true,
+    auth: true,
   },
 ];
 
@@ -36,8 +36,8 @@ function Sidebar() {
       <div className="flex flex-col items-end">
         <div className="space-y-2 mx-auto">
           <Logo className="mb-2" />
-          {items.map(({ href, label, icon }) => (
-            <SidebarItem key={href} href={href} label={label} icon={icon} />
+          {items.map(({ href, label, icon, auth }) => (
+            <SidebarItem key={href} href={href} label={label} icon={icon} auth={auth} />
           ))}
 
           {/* Logout */}
