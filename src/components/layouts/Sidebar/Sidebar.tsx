@@ -30,7 +30,6 @@ const items = [
 function Sidebar() {
   const loginModalState = useLoginModalState();
   const { data: currentUser } = useCurrentUser();
-  console.log("CUR:", currentUser);
 
   return (
     <div className="h-full px-2 shadow-sidebar md:px-6 bg-white">
