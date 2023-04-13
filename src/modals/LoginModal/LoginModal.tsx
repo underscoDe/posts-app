@@ -2,7 +2,9 @@ import Input from "@/components/Input";
 import Modal from "@/components/Modal";
 import useLoginModalState from "@/hooks/useLoginModalState";
 import useRegisterModalState from "@/hooks/useRegisterModalState";
+import { signIn } from "next-auth/react";
 import * as React from "react";
+import { toast } from "react-hot-toast";
 
 function LoginModal() {
   const loginModalState = useLoginModalState();
@@ -16,12 +18,19 @@ function LoginModal() {
     try {
       setIsLoading(true);
       // login stuff here
+      await signIn("credentials", {
+        email,
+        password,
+      });
 
+      toast.success("Login successful");
       loginModalState.close();
     } catch (err) {
       console.log("LOGIN:", err);
+    } finally {
+      setIsLoading(false);
     }
-  }, [loginModalState]);
+  }, [loginModalState, email, password]);
 
   const switchToRegister = React.useCallback(() => {
     if (isLoading) return;
