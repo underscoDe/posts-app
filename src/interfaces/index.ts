@@ -14,6 +14,7 @@ export interface SidebarItemProps {
   href?: string;
   icon: Icon;
   onClick?: () => void;
+  auth?: boolean;
 }
 
 export interface ModalProps {

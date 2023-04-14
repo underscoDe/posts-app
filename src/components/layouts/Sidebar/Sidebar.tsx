@@ -11,34 +11,33 @@ const items = [
     label: "Feed",
     href: "/",
     icon: Grid,
-    show: true,
+    auth: false,
   },
   {
     label: "Notifications",
     href: "/notifications",
     icon: Bell,
-    show: true,
+    auth: true,
   },
   {
     label: "Profile",
     href: "/profile",
     icon: User,
-    show: true,
+    auth: true,
   },
 ];
 
 function Sidebar() {
   const loginModalState = useLoginModalState();
   const { data: currentUser } = useCurrentUser();
-  console.log("CUR:", currentUser);
 
   return (
     <div className="h-full px-2 shadow-sidebar md:px-6 bg-white">
       <div className="flex flex-col items-end">
         <div className="space-y-2 mx-auto">
           <Logo className="mb-2" />
-          {items.map(({ href, label, icon }) => (
-            <SidebarItem key={href} href={href} label={label} icon={icon} />
+          {items.map(({ href, label, icon, auth }) => (
+            <SidebarItem key={href} href={href} label={label} icon={icon} auth={auth} />
           ))}
 
           {/* Logout */}
@@ -66,7 +65,7 @@ function Sidebar() {
               <div className="relative rounded h-14 w-14 flex items-center justify-center p-4 lg:hidden">
                 <LogIn size={28} color="white" />
               </div>
-              <div className="relative hidden lg:flex items-center gap-4 px-4 py-2 rounded">
+              <div className="relative hidden lg:flex items-center gap-4 p-4 rounded">
                 <LogIn size={28} color="white" />
                 <p className="hidden lg:block text-xl">Login</p>
               </div>
