@@ -30,7 +30,6 @@ function SidebarItem({
   };
 
   if (href === "/" && !currentUser) {
-    console.log("first")
     colors.itemBgColor = "bg-[#ffffff]";
     colors.itemTextColor = "text-[#4e5d78]";
     colors.iconColor = "#4e5d78";
