@@ -8,18 +8,18 @@ export default async function handler(
   if (req.method !== "GET") return res.status(405).end();
 
   try {
-    const { id } = req.query;
+    const { userId } = req.query;
 
-    if (!id || typeof id !== "string") throw new Error("Invalid ID");
+    if (!userId || typeof userId !== "string") throw new Error("Invalid ID");
 
     const foundUser = await prisma.user.findUnique({
-      where: { id },
+      where: { id: userId },
     });
 
     const followersCount = await prisma.user.count({
       where: {
         followingIds: {
-          has: id,
+          has: userId,
         },
       },
     });
